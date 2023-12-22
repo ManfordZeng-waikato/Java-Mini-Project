@@ -15,25 +15,44 @@ public class SecretNumber {
 
 //        Convert List to String then print
         StringBuilder sb = new StringBuilder();
-        for (Integer element:secretCode
-             ) {sb.append(element);
+        for (Integer element : secretCode
+        ) {
+            sb.append(element);
         }
-        String secretCodeFromComputer= sb.toString();
-        System.out.println("The secret code from computer is "+secretCodeFromComputer);
+        String secretCodeFromComputer = sb.toString();
+        System.out.println("The secret code from computer is " + secretCodeFromComputer);
+    }
+
+    public void generateSecret(String customSecretCode) {
+        // Validate the custom secret code (you may want to add additional validation)
+        if (customSecretCode.matches("\\d{4}")) {
+            secretCode = new ArrayList<>();
+            for (int i = 0; i < 4; i++) {
+                secretCode.add(Character.getNumericValue(customSecretCode.charAt(i)));
+            }
+        } else {
+            System.out.println("Invalid custom secret code. Using the default generated code.");
+
+        }
     }
 
     public Feedback checkGuess(String guess) {
         Feedback feedback = new Feedback();
 
-        for (int i = 0; i < 4; i++) {
-            int digit = Character.getNumericValue(guess.charAt(i));
+        try {
+            for (int i = 0; i < 4; i++) {
+                int digit = Character.getNumericValue(guess.charAt(i));
 
-            if (digit == secretCode.get(i)) {
-                feedback.incrementBulls();
-            } else if (secretCode.contains(digit)) {
-                feedback.incrementCows();
+                if (digit == secretCode.get(i)) {
+                    feedback.incrementBulls();
+                } else if (secretCode.contains(digit)) {
+                    feedback.incrementCows();
+                }
             }
+        } catch (Exception e) {
+            System.out.println("secretCode is null");
         }
+
 
         return feedback;
     }
@@ -41,4 +60,6 @@ public class SecretNumber {
     public List<Integer> getSecretCode() {
         return secretCode;
     }
+
+
 }
