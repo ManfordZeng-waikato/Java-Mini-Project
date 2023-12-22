@@ -1,0 +1,30 @@
+@startuml
+
+class Game {
+    - secretNumber: SecretNumber
+    + startGame()
+    + giveFeedback()
+}
+
+class Player {
+    + makeGuess()
+}
+
+class SecretNumber {
+    - secretCode
+    + generateSecret()
+    + checkGuess()
+}
+
+class Feedback {
+    - bulls
+    - cows
+}
+
+Game --> SecretNumber
+Game --> Player
+SecretNumber --> Feedback
+Player --> Game
+Feedback --> SecretNumber
+
+@enduml
