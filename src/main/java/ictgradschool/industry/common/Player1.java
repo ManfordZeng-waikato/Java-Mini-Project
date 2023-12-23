@@ -33,6 +33,8 @@ public class Player1 extends Player {
         secretNumber.generateSecret(mySecretCode);
     }
 
+
+
     //  Check if guess is valid
     private boolean isValidGuess(String guess) {
         // Check if the guess is a 4-digit number with distinct digits

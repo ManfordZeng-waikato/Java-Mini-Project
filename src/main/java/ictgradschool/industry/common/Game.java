@@ -30,17 +30,21 @@ public class Game {
             case 2:
                 this.computerPlayer = new MediumComputerPlayer();
                 break;
+            case 3:
+                this.computerPlayer = new HardComputerPlayer();
+                break;
             default:
-                System.out.println("pls enter 1 or 2");
+                System.out.println("pls enter 1,2 or 3");
         }
         computerPlayer.generateSecret();
         playGame();
     }
 
     private int selectAIDifficulty() {
-        System.out.println("Select AI difficulty:");
+        System.out.println("Select AI difficulty(input 1,2 or 3):");
         System.out.println("1. simple");
         System.out.println("2. medium");
+        System.out.println("3. hard");
         return Integer.parseInt(Keyboard.readInput());
     }
 

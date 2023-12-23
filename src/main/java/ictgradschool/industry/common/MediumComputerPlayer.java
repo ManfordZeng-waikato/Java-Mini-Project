@@ -39,4 +39,6 @@ public class MediumComputerPlayer extends Player {
         }
         secretNumber.generateSecret();
     }
+
+
 }
