@@ -22,8 +22,26 @@ public class Game {
         System.out.println("pls enter your secret code");
         player1.generateSecret();
         System.out.println("---");
+        int aiDifficulty = selectAIDifficulty();
+        switch (aiDifficulty) {
+            case 1:
+                this.computerPlayer = new ComputerPlayer();
+                break;
+            case 2:
+                this.computerPlayer = new MediumComputerPlayer();
+                break;
+            default:
+                System.out.println("pls enter 1 or 2");
+        }
         computerPlayer.generateSecret();
         playGame();
+    }
+
+    private int selectAIDifficulty() {
+        System.out.println("Select AI difficulty:");
+        System.out.println("1. simple");
+        System.out.println("2. medium");
+        return Integer.parseInt(Keyboard.readInput());
     }
 
     private void playGame() {
