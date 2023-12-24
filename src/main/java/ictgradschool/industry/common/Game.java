@@ -35,9 +35,31 @@ public class Game {
                 break;
             default:
                 System.out.println("pls enter 1,2 or 3");
+                return;
+        }
+
+        int manualOrFile = selectManualOrFile();
+        switch (manualOrFile) {
+            case 1:
+
+                break;
+            case 2:
+
+                this.player1 = new FilePlayer();
+                break;
+            default:
+                System.out.println("pls enter 1 or 2 ");
+                return;
         }
         computerPlayer.generateSecret();
         playGame();
+    }
+
+    private int selectManualOrFile() {
+        System.out.println("Select manual or file (input 1 or 2):");
+        System.out.println("1.manual");
+        System.out.println("2. file");
+        return Integer.parseInt(Keyboard.readInput());
     }
 
     private int selectAIDifficulty() {

@@ -36,7 +36,7 @@ public class Player1 extends Player {
 
 
     //  Check if guess is valid
-    private boolean isValidGuess(String guess) {
+    boolean isValidGuess(String guess) {
         // Check if the guess is a 4-digit number with distinct digits
         return guess.matches("\\d{4}") && guess.chars().distinct().count() == 4;
     }

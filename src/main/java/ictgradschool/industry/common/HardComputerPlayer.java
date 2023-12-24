@@ -65,7 +65,7 @@ public class HardComputerPlayer extends Player {
             }
         } while (possibleGuesses.size() > 0);
 
-        Collections.shuffle(possibleGuesses);
+
         return possibleGuesses.get(0);
     }
 
