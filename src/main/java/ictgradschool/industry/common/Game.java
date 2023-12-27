@@ -90,6 +90,7 @@ public class Game {
             Feedback computerFeedback = player1.checkGuess(computerGuess);
             System.out.println("Computer's guess: " + computerGuess);
             System.out.println("Result: " + computerFeedback.getBulls() + " bulls and " + computerFeedback.getCows() + " cows");
+
             if (computerFeedback.getBulls() == 4) {
                 System.out.println("Oops! The computer guessed your secret code!");
                 return;
@@ -97,6 +98,7 @@ public class Game {
 
             computerAttempts--;
             System.out.println("Computer's attempts left: " + computerAttempts);
+            System.out.println("----");
 
         }
         System.out.println("Game over. No one guessed the secret code.");

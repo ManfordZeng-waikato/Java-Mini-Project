@@ -53,7 +53,7 @@ public class SecretNumber {
                 }
             }
         } catch (Exception e) {
-            System.out.println("secretCode is null");
+//            System.out.println("secretCode is null");
         }
 
 
