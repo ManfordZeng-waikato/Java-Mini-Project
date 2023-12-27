@@ -12,7 +12,9 @@ public class HardComputerPlayer extends Player {
 
 
     public HardComputerPlayer() {
+        super();
         this.possibleGuesses = generateAllPossibleCodes();
+
 
     }
 

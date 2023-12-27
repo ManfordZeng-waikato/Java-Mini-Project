@@ -4,6 +4,7 @@ public class Player1 extends Player {
 
 
     public Player1() {
+        super();
 
     }
 
@@ -32,7 +33,6 @@ public class Player1 extends Player {
         }
         secretNumber.generateSecret(mySecretCode);
     }
-
 
 
     //  Check if guess is valid

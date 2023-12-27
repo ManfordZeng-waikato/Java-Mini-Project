@@ -12,7 +12,7 @@ public class SecretNumber {
         List<Integer> digits = new ArrayList<>(List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 //        Randomly generates secret code from List
         Collections.shuffle(digits);
-        secretCode = digits.subList(0, 4);
+       this.secretCode = digits.subList(0, 4);
 
 //        Convert List to String then print
         StringBuilder sb = new StringBuilder();
@@ -29,9 +29,9 @@ public class SecretNumber {
     public void generateSecret(String customSecretCode) {
         // Validate the custom secret code (you may want to add additional validation)
         if (customSecretCode.matches("\\d{4}")) {
-            secretCode = new ArrayList<>();
+            this.secretCode = new ArrayList<>();
             for (int i = 0; i < 4; i++) {
-                secretCode.add(Character.getNumericValue(customSecretCode.charAt(i)));
+               this.secretCode.add(Character.getNumericValue(customSecretCode.charAt(i)));
             }
         } else {
             System.out.println("Invalid custom secret code. Using the default generated code.");
@@ -46,9 +46,9 @@ public class SecretNumber {
             for (int i = 0; i < 4; i++) {
                 int digit = Character.getNumericValue(guess.charAt(i));
 
-                if (digit == secretCode.get(i)) {
+                if (digit ==this.secretCode.get(i)) {
                     feedback.incrementBulls();
-                } else if (secretCode.contains(digit)) {
+                } else if (this.secretCode.contains(digit)) {
                     feedback.incrementCows();
                 }
             }
@@ -61,6 +61,8 @@ public class SecretNumber {
     }
 
     public List<Integer> getSecretCode() {
+
+        generateSecret();
         return secretCode;
     }
 

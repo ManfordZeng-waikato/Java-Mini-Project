@@ -1,8 +1,6 @@
 package ictgradschool.industry.common;
 
-import ictgradschool.industry.common.Feedback;
-import ictgradschool.industry.common.Keyboard;
-import ictgradschool.industry.common.Player1;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,6 +13,7 @@ public class FilePlayer extends Player {
     private List<String> fileGuesses;
 
     public FilePlayer() {
+        super();
         this.fileGuesses = readGuessesFromFile(selectFilename());
     }
 

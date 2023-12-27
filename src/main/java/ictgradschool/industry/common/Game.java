@@ -1,5 +1,11 @@
 package ictgradschool.industry.common;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
 
 
@@ -7,6 +13,9 @@ public class Game {
     private Player computerPlayer;
     private int playerAttempts;
     private int computerAttempts;
+    private List<String> computerGuessStringList;
+    private List<String> playerGuessStringList;
+
 
     public Game() {
         /*this.secretNumber = new SecretNumber();
@@ -16,6 +25,8 @@ public class Game {
         this.computerPlayer = new ComputerPlayer();
         this.playerAttempts = 7;
         this.computerAttempts = 7;
+        this.computerGuessStringList = new ArrayList<>();
+        this.playerGuessStringList = new ArrayList<>();
     }
 
     public void startGame() {
@@ -24,27 +35,20 @@ public class Game {
         System.out.println("---");
         int aiDifficulty = selectAIDifficulty();
         switch (aiDifficulty) {
-            case 1:
-                this.computerPlayer = new ComputerPlayer();
-                break;
-            case 2:
-                this.computerPlayer = new MediumComputerPlayer();
-                break;
-            case 3:
-                this.computerPlayer = new HardComputerPlayer();
-                break;
-            default:
+            case 1 -> this.computerPlayer = new ComputerPlayer();
+            case 2 -> this.computerPlayer = new MediumComputerPlayer();
+            case 3 -> this.computerPlayer = new HardComputerPlayer();
+            default -> {
                 System.out.println("pls enter 1,2 or 3");
                 return;
+            }
         }
 
         int manualOrFile = selectManualOrFile();
         switch (manualOrFile) {
             case 1:
-
                 break;
             case 2:
-
                 this.player1 = new FilePlayer();
                 break;
             default:
@@ -53,6 +57,7 @@ public class Game {
         }
         computerPlayer.generateSecret();
         playGame();
+        saveResultToFile();
     }
 
     private int selectManualOrFile() {
@@ -76,6 +81,7 @@ public class Game {
         while (playerAttempts > 0 && computerAttempts > 0) {
 
             String playerGuess = player1.makeGuess();
+            playerGuessStringList.add(playerGuess);
             Feedback playerFeedback = computerPlayer.checkGuess(playerGuess);
             System.out.println("Result: " + playerFeedback.getBulls() + " bulls and " + playerFeedback.getCows() + " cows");
             if (playerFeedback.getBulls() == 4) {
@@ -87,6 +93,7 @@ public class Game {
 
 
             String computerGuess = computerPlayer.makeGuess();
+            computerGuessStringList.add(computerGuess);
             Feedback computerFeedback = player1.checkGuess(computerGuess);
             System.out.println("Computer's guess: " + computerGuess);
             System.out.println("Result: " + computerFeedback.getBulls() + " bulls and " + computerFeedback.getCows() + " cows");
@@ -104,10 +111,27 @@ public class Game {
         System.out.println("Game over. No one guessed the secret code.");
     }
 
+    private void saveResultToFile() {
+        System.out.println("Do you want to save the result to file? (yes/no)");
+        String response = Keyboard.readInput().toLowerCase();
+        if (response.equals("yes")) {
+            System.out.println("Enter the filename:");
+            String fileName = Keyboard.readInput();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+                writer.write("Your code: " + this.player1.secretNumber.getSecretCode() + "\n");
+                writer.write("Computer’s code: " + this.computerPlayer.secretNumber.getSecretCode() + "\n\n");
 
-    //  Check if guess is valid
-    private boolean isValidGuess(String guess) {
-        // Check if the guess is a 4-digit number with distinct digits
-        return guess.matches("\\d{4}") && guess.chars().distinct().count() == 4;
+                for (String computerGuess : computerGuessStringList) {
+                    writer.write("Computer guess: " + computerGuess + " result : " + player1.checkGuess(computerGuess).getCows()+" cows " + " and "+player1.checkGuess(computerGuess).getBulls()+" bulls"+ "\n");
+                }
+                writer.write("\n");
+                for (String playerGuess : playerGuessStringList) {
+                    writer.write("You guess: " + playerGuess + " result: " + computerPlayer.checkGuess(playerGuess).getCows()+" cows" + " and "+computerPlayer.checkGuess(playerGuess).getBulls()+" bulls"+ "\n");
+                }
+            } catch (IOException e) {
+                System.out.println("Error saving results to the file.");
+            }
+        }
     }
+
 }

@@ -9,6 +9,7 @@ public class MediumComputerPlayer extends Player {
 
 
     public MediumComputerPlayer() {
+        super();
         this.previousGuesses = new HashSet<>();
     }
 
