@@ -8,7 +8,7 @@ public class SecretNumber {
     private List<Integer> secretCode;
 
 //   Randomly generate secret code
-    public void generateSecret() {
+    public List<Integer> generateSecret() {
         List<Integer> digits = new ArrayList<>(List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
 //        Randomly generates secret code from List
         Collections.shuffle(digits);
@@ -22,11 +22,12 @@ public class SecretNumber {
         }
         String secretCodeFromComputer = sb.toString();
         System.out.println("The secret code from computer is " + secretCodeFromComputer);
+        return secretCode;
     }
 
 
 //    player enter secret code
-    public void generateSecret(String customSecretCode) {
+    public List<Integer> generateSecret(String customSecretCode) {
         // Validate the custom secret code (you may want to add additional validation)
         if (customSecretCode.matches("\\d{4}")) {
             this.secretCode = new ArrayList<>();
@@ -37,6 +38,7 @@ public class SecretNumber {
             System.out.println("Invalid custom secret code. Using the default generated code.");
 
         }
+        return secretCode;
     }
 
     public Feedback checkGuess(String guess) {
@@ -62,8 +64,8 @@ public class SecretNumber {
 
     public List<Integer> getSecretCode() {
 
-        generateSecret();
-        return secretCode;
+
+        return this.secretCode;
     }
 
 

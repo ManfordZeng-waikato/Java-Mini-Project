@@ -49,10 +49,10 @@ public class FilePlayer extends Player {
     }
 
     @Override
-    public void generateSecret() {
+    public List generateSecret() {
         String mySecretCode = Keyboard.readInput();
 
-        secretNumber.generateSecret(mySecretCode);
+       return secretNumber.generateSecret(mySecretCode);
     }
 
 

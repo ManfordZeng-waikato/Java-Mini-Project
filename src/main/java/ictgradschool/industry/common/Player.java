@@ -1,5 +1,7 @@
 package ictgradschool.industry.common;
 
+import java.util.List;
+
 public abstract class Player {
     public SecretNumber secretNumber;
 
@@ -14,6 +16,6 @@ public abstract class Player {
         return secretNumber.checkGuess(guess);
     }*/
 
-    public abstract void generateSecret();
+    public abstract List generateSecret();
 
 }

@@ -15,11 +15,12 @@ public class Game {
     private int computerAttempts;
     private List<String> computerGuessStringList;
     private List<String> playerGuessStringList;
+    private List playerSecretCode;
+    private List computerSecretCode;
 
 
     public Game() {
-        /*this.secretNumber = new SecretNumber();
-        this.attempts = 7;*/
+
 
         this.player1 = new Player1();
         this.computerPlayer = new ComputerPlayer();
@@ -27,11 +28,15 @@ public class Game {
         this.computerAttempts = 7;
         this.computerGuessStringList = new ArrayList<>();
         this.playerGuessStringList = new ArrayList<>();
+        this.playerSecretCode = new ArrayList<>();
+        this.computerSecretCode = new ArrayList<>();
     }
 
     public void startGame() {
         System.out.println("pls enter your secret code");
-        player1.generateSecret();
+        List playerSecretCode = player1.generateSecret();
+        this.playerSecretCode = playerSecretCode;
+
         System.out.println("---");
         int aiDifficulty = selectAIDifficulty();
         switch (aiDifficulty) {
@@ -55,7 +60,8 @@ public class Game {
                 System.out.println("pls enter 1 or 2 ");
                 return;
         }
-        computerPlayer.generateSecret();
+        List computerSecretCode = computerPlayer.generateSecret();
+        this.computerSecretCode = computerSecretCode;
         playGame();
         saveResultToFile();
     }
@@ -118,20 +124,42 @@ public class Game {
             System.out.println("Enter the filename:");
             String fileName = Keyboard.readInput();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-                writer.write("Your code: " + this.player1.secretNumber.getSecretCode() + "\n");
-                writer.write("Computer’s code: " + this.computerPlayer.secretNumber.getSecretCode() + "\n\n");
+                writer.write("Bulls & Cows game result.");
+                writer.write("Your code: " + toString(playerSecretCode) + "\n");
+                writer.write("Computer’s code: " + toString(computerSecretCode) + "\n\n");
+                writer.write("---------" + "\n");
+                int turn = 0;
+                for (int i = 0; i < 7; i++) {
+                    turn++;
+                    writer.write("Turn " + turn + "\n");
+                    if (i < computerGuessStringList.size()) {
+                        writer.write("Computer guess: " + computerGuessStringList.get(i) + " result : " + player1.checkGuess(computerGuessStringList.get(i)).getCows() + " cows " + " and " + player1.checkGuess(computerGuessStringList.get(i)).getBulls() + " bulls" + "\n");
+                    }
+                    if (i < playerGuessStringList.size()) {
+                        writer.write("You guess: " + playerGuessStringList.get(i) + " result: " + computerPlayer.checkGuess(playerGuessStringList.get(i)).getCows() + " cows" + " and " + computerPlayer.checkGuess(playerGuessStringList.get(i)).getBulls() + " bulls" + "\n");
+                    }
+                    writer.write("\n");
+                }
 
-                for (String computerGuess : computerGuessStringList) {
-                    writer.write("Computer guess: " + computerGuess + " result : " + player1.checkGuess(computerGuess).getCows()+" cows " + " and "+player1.checkGuess(computerGuess).getBulls()+" bulls"+ "\n");
-                }
-                writer.write("\n");
-                for (String playerGuess : playerGuessStringList) {
-                    writer.write("You guess: " + playerGuess + " result: " + computerPlayer.checkGuess(playerGuess).getCows()+" cows" + " and "+computerPlayer.checkGuess(playerGuess).getBulls()+" bulls"+ "\n");
-                }
+
             } catch (IOException e) {
                 System.out.println("Error saving results to the file.");
             }
         }
+    }
+
+    private String toString(List list) {
+        StringBuilder builder = new StringBuilder();
+        for (Object item : list) {
+            builder.append(item).append(", ");
+        }
+
+        String result = builder.toString();
+
+        if (!result.isEmpty()) {
+            result = result.substring(0, result.length() - 2);
+        }
+        return result;
     }
 
 }

@@ -21,11 +21,11 @@ public class ComputerPlayer extends Player{
     }
 
     @Override
-    public void generateSecret() {
+    public List generateSecret() {
         if (secretNumber == null) {
             secretNumber = new SecretNumber();
         }
-        secretNumber.generateSecret();
+       return secretNumber.generateSecret();
     }
 
 

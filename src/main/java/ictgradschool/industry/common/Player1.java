@@ -1,5 +1,7 @@
 package ictgradschool.industry.common;
 
+import java.util.List;
+
 public class Player1 extends Player {
 
 
@@ -25,13 +27,14 @@ public class Player1 extends Player {
     }
 
     @Override
-    public void generateSecret() {
+    public List generateSecret() {
         String mySecretCode = Keyboard.readInput();
         while (!isValidGuess(mySecretCode)) {
             System.out.println("Invalid input. Please enter 4 distinct digits:");
             mySecretCode = Keyboard.readInput();
         }
-        secretNumber.generateSecret(mySecretCode);
+        return secretNumber.generateSecret(mySecretCode);
+
     }
 
 
