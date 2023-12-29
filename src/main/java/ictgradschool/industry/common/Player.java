@@ -10,11 +10,8 @@ public abstract class Player {
     }
 
     public abstract String makeGuess();
-    public abstract Feedback checkGuess(String guess);
-    /* {
 
-        return secretNumber.checkGuess(guess);
-    }*/
+    public abstract Feedback checkGuess(String guess);
 
     public abstract List generateSecret();
 
