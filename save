@@ -1,31 +1,32 @@
-Bulls & Cows game result.Your code: 2, 5, 6, 9
-Computer’s code: 9, 1, 4, 7
+Bulls & Cows game result.Your code: 1, 2, 3, 6
+Computer’s code: 8, 5, 1, 7
 
----------Turn 1
-Computer guess: 6574 result : 0 cows  and 0 bulls
-You guess: 4568 result: 1 cows and 0 bulls
+---------
+Turn 1
+Computer guess: 9643 result : 0 cows  and 0 bulls
+You guess: 4568 result: 1 cows and 1 bulls
 
 Turn 2
-Computer guess: 0967 result : 0 cows  and 0 bulls
-You guess: 1458 result: 2 cows and 0 bulls
+Computer guess: 1635 result : 0 cows  and 0 bulls
+You guess: 1458 result: 3 cows and 0 bulls
 
 Turn 3
-Computer guess: 2864 result : 0 cows  and 0 bulls
+Computer guess: 0873 result : 0 cows  and 0 bulls
 You guess: 1478 result: 3 cows and 0 bulls
 
 Turn 4
-Computer guess: 1974 result : 0 cows  and 0 bulls
+Computer guess: 7029 result : 0 cows  and 0 bulls
 You guess: 1456 result: 2 cows and 0 bulls
 
 Turn 5
-Computer guess: 4981 result : 0 cows  and 0 bulls
+Computer guess: 2037 result : 0 cows  and 0 bulls
 You guess: 1547 result: 1 cows and 2 bulls
 
 Turn 6
-Computer guess: 3427 result : 0 cows  and 0 bulls
-You guess: 2569 result: 1 cows and 0 bulls
+Computer guess: 1276 result : 0 cows  and 0 bulls
+You guess: 1563 result: 1 cows and 1 bulls
 
 Turn 7
-Computer guess: 8341 result : 0 cows  and 0 bulls
-You guess: 1456 result: 2 cows and 0 bulls
+Computer guess: 6052 result : 0 cows  and 0 bulls
+You guess: 1569 result: 1 cows and 1 bulls
 
