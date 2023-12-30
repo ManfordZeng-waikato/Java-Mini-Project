@@ -18,6 +18,10 @@ public class Game {
     private List playerSecretCode;
     private List computerSecretCode;
 
+    private int result = 0;
+
+
+
 
     public Game() {
 
@@ -30,6 +34,7 @@ public class Game {
         this.playerGuessStringList = new ArrayList<>();
         this.playerSecretCode = new ArrayList<>();
         this.computerSecretCode = new ArrayList<>();
+        this.result=0;
     }
 
     public void startGame() {
@@ -92,6 +97,7 @@ public class Game {
             System.out.println("Result: " + playerFeedback.getBulls() + " bulls and " + playerFeedback.getCows() + " cows");
             if (playerFeedback.getBulls() == 4) {
                 System.out.println("You win! ：）");
+                result = 1;
                 return;
             }
             playerAttempts--;
@@ -106,6 +112,7 @@ public class Game {
 
             if (computerFeedback.getBulls() == 4) {
                 System.out.println("Oops! The computer guessed your secret code!");
+                result = 2;
                 return;
             }
 
@@ -124,7 +131,7 @@ public class Game {
             System.out.println("Enter the filename:");
             String fileName = Keyboard.readInput();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-                writer.write("Bulls & Cows game result.");
+                writer.write("Bulls & Cows game result."+ "\n");
                 writer.write("Your code: " + toString(playerSecretCode) + "\n");
                 writer.write("Computer’s code: " + toString(computerSecretCode) + "\n\n");
                 writer.write("---------" + "\n");
@@ -140,6 +147,15 @@ public class Game {
                     }
                     writer.write("\n");
                 }
+
+                if (result == 1) {
+                    writer.write("You win! ：）");
+                } else if (result == 2) {
+                    writer.write("Oops! The computer guessed your secret code!");
+                } else {
+                    writer.write("Game over. No one guessed the secret code.");
+                }
+
 
 
             } catch (IOException e) {
