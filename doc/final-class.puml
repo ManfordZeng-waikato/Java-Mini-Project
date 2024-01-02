@@ -1,30 +1,32 @@
 @startuml
-class ictgradschool.industry.common.Player1 {
+class Player1 {
++ <<Create>> Player1()
 + String makeGuess()
 + Feedback checkGuess(String)
 + List generateSecret()
 ~ boolean isValidGuess(String)
 }
-class ictgradschool.industry.common.ComputerPlayer {
+class ComputerPlayer {
 - SecretNumber secretNumber
 + String makeGuess()
 + Feedback checkGuess(String)
 + List generateSecret()
 }
-abstract class ictgradschool.industry.common.Player {
+abstract class Player {
 + SecretNumber secretNumber
++ <<Create>> Player()
 + {abstract}String makeGuess()
 + {abstract}Feedback checkGuess(String)
 + {abstract}List generateSecret()
 }
-class ictgradschool.industry.common.SecretNumber {
+class SecretNumber {
 - List<Integer> secretCode
 + List<Integer> generateSecret()
 + List<Integer> generateSecret(String)
 + Feedback checkGuess(String)
 + List<Integer> getSecretCode()
 }
-class ictgradschool.industry.common.Feedback {
+class Feedback {
 - int bulls
 - int cows
 + int getBulls()
@@ -32,25 +34,27 @@ class ictgradschool.industry.common.Feedback {
 + void incrementBulls()
 + void incrementCows()
 }
-class ictgradschool.industry.common.Main {
+class Main {
 + {static} void main(String[])
 }
-class ictgradschool.industry.common.Keyboard {
+class Keyboard {
 - {static} Scanner in
 - {static} boolean redirected
 + {static} String readInput()
 }
-class ictgradschool.industry.common.FilePlayer {
+class FilePlayer {
 - List<String> fileGuesses
++ <<Create>> FilePlayer()
 - List<String> readGuessesFromFile(String)
 - String selectFilename()
 + String makeGuess()
 + Feedback checkGuess(String)
 + List generateSecret()
 }
-class ictgradschool.industry.common.HardComputerPlayer {
+class HardComputerPlayer {
 - SecretNumber secretNumber
 - List<String> possibleGuesses
++ <<Create>> HardComputerPlayer()
 - List<String> generateAllPossibleCodes()
 + String makeGuess()
 - String getRandomGuess()
@@ -58,7 +62,7 @@ class ictgradschool.industry.common.HardComputerPlayer {
 + Feedback checkGuess(String)
 + List generateSecret()
 }
-class ictgradschool.industry.common.Game {
+class Game {
 - Player player1
 - Player computerPlayer
 - int playerAttempts
@@ -67,6 +71,8 @@ class ictgradschool.industry.common.Game {
 - List<String> playerGuessStringList
 - List playerSecretCode
 - List computerSecretCode
+- int result
++ <<Create>> Game()
 + void startGame()
 - int selectManualOrFile()
 - int selectAIDifficulty()
@@ -74,18 +80,19 @@ class ictgradschool.industry.common.Game {
 - void saveResultToFile()
 - String toString(List)
 }
-class ictgradschool.industry.common.MediumComputerPlayer {
+class MediumComputerPlayer {
 - SecretNumber secretNumber
 - Set<String> previousGuesses
++ <<Create>> MediumComputerPlayer()
 + String makeGuess()
 + Feedback checkGuess(String)
 + List generateSecret()
 }
 
 
-ictgradschool.industry.common.Player <|-- ictgradschool.industry.common.Player1
-ictgradschool.industry.common.Player <|-- ictgradschool.industry.common.ComputerPlayer
-ictgradschool.industry.common.Player <|-- ictgradschool.industry.common.FilePlayer
-ictgradschool.industry.common.Player <|-- ictgradschool.industry.common.HardComputerPlayer
-ictgradschool.industry.common.Player <|-- ictgradschool.industry.common.MediumComputerPlayer
+Player <|-- Player1
+Player <|-- ComputerPlayer
+Player <|-- FilePlayer
+Player <|-- HardComputerPlayer
+Player <|-- MediumComputerPlayer
 @enduml
