@@ -15,4 +15,5 @@ public abstract class Player {
 
     public abstract List generateSecret();
 
+    public void feedback(String guess, Feedback fb) {}
 }

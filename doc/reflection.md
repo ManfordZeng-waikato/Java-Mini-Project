@@ -9,6 +9,7 @@ Moreover,i make Player class absract since different object class needs differen
 For example, the FilePlayer, subclass of Player, in this class,we need to read guess from file,
 so the makeGuess() method needs to be overrided in a different way.
 But in HardComputerPlayer class, i can not Let the computer use the algorithm required by the question to make efficient predictions.
+Finally,with the help of teacher,i make it.
 
 All in all, this project requires us to apply almost all the knowledge points we learned earlier,
 such as inherit, abstract,IO,Array List,loop. It is a really good chance to review the past and learn something

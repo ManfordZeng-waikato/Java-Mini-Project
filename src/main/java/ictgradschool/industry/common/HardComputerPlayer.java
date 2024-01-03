@@ -1,21 +1,15 @@
 package ictgradschool.industry.common;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 
 public class HardComputerPlayer extends Player {
     private SecretNumber secretNumber;
     private List<String> possibleGuesses;
 
-
     public HardComputerPlayer() {
         super();
         this.possibleGuesses = generateAllPossibleCodes();
-
-
     }
 
     private List<String> generateAllPossibleCodes() {
@@ -24,7 +18,12 @@ public class HardComputerPlayer extends Player {
             for (int j = 0; j <= 9; j++) {
                 for (int k = 0; k <= 9; k++) {
                     for (int l = 0; l <= 9; l++) {
-                        if (i != j && i != k && i != l && j != k && j != l && k != l) {
+                        HashSet<Integer> dd = new HashSet<>();
+                        Collections.addAll(dd, i, j, k, l);
+
+                        if (dd.size() == 4) {
+//                        }
+//                        if (i != j && i != k && i != l && j != k && j != l && k != l) {
                             allCodes.add(String.format("%d%d%d%d", i, j, k, l));
                         }
                     }
@@ -36,14 +35,10 @@ public class HardComputerPlayer extends Player {
 
     @Override
     public String makeGuess() {
-        if (possibleGuesses.size() == generateAllPossibleCodes().size()) {
-            return getRandomGuess();
-        }
+        String guess = getRandomGuess();
 
-        // 如果不是第一次猜测，使用智能剪枝方法选择猜测
-        String guess = chooseSmartGuess();
-        possibleGuesses.remove(guess);
         return guess;
+
     }
 
     private String getRandomGuess() {
@@ -51,37 +46,44 @@ public class HardComputerPlayer extends Player {
         return possibleGuesses.get(0);
     }
 
-    private String chooseSmartGuess() {
-        do {
-            String lastGuess = getRandomGuess();
-            Feedback lastFeedback = secretNumber.checkGuess(lastGuess);
+    @Override
+    public void feedback(String guess, Feedback fb) {
+        super.feedback(guess, fb);
 
-            for (Iterator<String> iterator = possibleGuesses.iterator(); iterator.hasNext(); ) {
-                String possibleGuess = iterator.next();
-                Feedback feedbackForPossibleGuess = secretNumber.checkGuess(possibleGuess);
+        Iterator<String> iterator = possibleGuesses.iterator();
 
+        SecretNumber sc = new SecretNumber();
+        sc.generateSecret(guess);
 
-                if (!(lastFeedback.getBulls() == feedbackForPossibleGuess.getBulls() && lastFeedback.getCows() == feedbackForPossibleGuess.getCows())) {
-                    iterator.remove();
-                }
+        while (iterator.hasNext()) {
+            String possibleGuess = iterator.next();
+            Feedback feedbackForPossibleGuess = sc.checkGuess(possibleGuess);
+
+            if (fb.getBulls() != feedbackForPossibleGuess.getBulls()) {
+                iterator.remove();
+            } else if (fb.getCows() != feedbackForPossibleGuess.getCows()) {
+                iterator.remove();
             }
-        } while (possibleGuesses.size() > 0);
 
 
-        return possibleGuesses.get(0);
+        }
+
+        System.out.println(possibleGuesses.size() + " remaining");
     }
 
     @Override
     public Feedback checkGuess(String guess) {
-
         return secretNumber.checkGuess(guess);
     }
+
+
 
     @Override
     public List generateSecret() {
         if (secretNumber == null) {
             secretNumber = new SecretNumber();
         }
-       return secretNumber.generateSecret();
+        return secretNumber.generateSecret();
     }
 }
+

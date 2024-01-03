@@ -94,6 +94,7 @@ public class Game {
             String playerGuess = player1.makeGuess();
             playerGuessStringList.add(playerGuess);
             Feedback playerFeedback = computerPlayer.checkGuess(playerGuess);
+
             System.out.println("Result: " + playerFeedback.getBulls() + " bulls and " + playerFeedback.getCows() + " cows");
             if (playerFeedback.getBulls() == 4) {
                 System.out.println("You win! ：）");
@@ -107,6 +108,7 @@ public class Game {
             String computerGuess = computerPlayer.makeGuess();
             computerGuessStringList.add(computerGuess);
             Feedback computerFeedback = player1.checkGuess(computerGuess);
+            computerPlayer.feedback(computerGuess, computerFeedback);
             System.out.println("Computer's guess: " + computerGuess);
             System.out.println("Result: " + computerFeedback.getBulls() + " bulls and " + computerFeedback.getCows() + " cows");
 

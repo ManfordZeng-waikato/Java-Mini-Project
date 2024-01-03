@@ -1,6 +1,5 @@
 @startuml
 class Player1 {
-+ <<Create>> Player1()
 + String makeGuess()
 + Feedback checkGuess(String)
 + List generateSecret()
@@ -14,10 +13,10 @@ class ComputerPlayer {
 }
 abstract class Player {
 + SecretNumber secretNumber
-+ <<Create>> Player()
 + {abstract}String makeGuess()
 + {abstract}Feedback checkGuess(String)
 + {abstract}List generateSecret()
++ void feedback(String,Feedback)
 }
 class SecretNumber {
 - List<Integer> secretCode
@@ -44,7 +43,6 @@ class Keyboard {
 }
 class FilePlayer {
 - List<String> fileGuesses
-+ <<Create>> FilePlayer()
 - List<String> readGuessesFromFile(String)
 - String selectFilename()
 + String makeGuess()
@@ -54,11 +52,10 @@ class FilePlayer {
 class HardComputerPlayer {
 - SecretNumber secretNumber
 - List<String> possibleGuesses
-+ <<Create>> HardComputerPlayer()
 - List<String> generateAllPossibleCodes()
 + String makeGuess()
 - String getRandomGuess()
-- String chooseSmartGuess()
++ void feedback(String,Feedback)
 + Feedback checkGuess(String)
 + List generateSecret()
 }
@@ -72,7 +69,6 @@ class Game {
 - List playerSecretCode
 - List computerSecretCode
 - int result
-+ <<Create>> Game()
 + void startGame()
 - int selectManualOrFile()
 - int selectAIDifficulty()
@@ -83,7 +79,6 @@ class Game {
 class MediumComputerPlayer {
 - SecretNumber secretNumber
 - Set<String> previousGuesses
-+ <<Create>> MediumComputerPlayer()
 + String makeGuess()
 + Feedback checkGuess(String)
 + List generateSecret()

@@ -26,6 +26,7 @@ public class Player1 extends Player {
         return secretNumber.checkGuess(guess);
     }
 
+
     @Override
     public List generateSecret() {
         String mySecretCode = Keyboard.readInput();
