@@ -94,7 +94,7 @@ public class Game {
             String playerGuess = player1.makeGuess();
             playerGuessStringList.add(playerGuess);
             Feedback playerFeedback = computerPlayer.checkGuess(playerGuess);
-
+//            player1.feedback(playerGuess, playerFeedback);
             System.out.println("Result: " + playerFeedback.getBulls() + " bulls and " + playerFeedback.getCows() + " cows");
             if (playerFeedback.getBulls() == 4) {
                 System.out.println("You win! ：）");
